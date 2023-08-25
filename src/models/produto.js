@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const esquema = new mongoose.Schema(
     {   
-        id: {
+        posicao: {
             type: Number,
             required: 'é obrigatorio'
         },
