@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if(process.env.NODE_ENV !== "test"){
     const swaggerFile = require('./swagger/swagger_output.json')
-    app.get('/', (req, res) => { /* #swagger.ignore = true */ res.redirect('/doc'); });
+    app.get('/', (req, res) => { /* swagger.ignore = true */ res.redirect('/doc'); });
     app.use('/doc', authDocProduction, swaggerUI.serve, swaggerUI.setup(swaggerFile, swaggerOptions));
 }
 
@@ -35,6 +35,5 @@ if(process.env.NODE_ENV !== "test"){
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => console.log('Servidor rodando na porta ' +PORT))
 }
-
 
 module.exports = app;

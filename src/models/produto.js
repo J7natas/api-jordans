@@ -48,5 +48,5 @@ const esquema = new mongoose.Schema(
     }
 );
 
-const esquemaProduto = mongoose.models.Produto || mongoose.model('Produto', esquema);
-module.exports = esquemaProduto;
+const EsquemaProduto = mongoose.models.Produto || mongoose.model('Produto', esquema);
+module.exports = EsquemaProduto;

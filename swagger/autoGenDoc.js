@@ -1,41 +1,41 @@
 const mongooseToSwagger = require('mongoose-to-swagger');
-const esquemaProduto = require('../src/models/produto.js');
-const swaggerAutoGen = require('swagger-autogen')({
+const EsquemaProduto = require('../src/models/produto');
+const swaggerAutogen = require('swagger-autogen')({
     openapi: '3.0.0',
-    language: 'pt-BR'
+    lenguage: 'pt-BR'
 });
 
-const outputFile = './swagger_output.json';
-const endPointsFile = ['../index.js', '../src/routes.js']
+let outputFile = './swagger_output.json';
+let endpointsFile = ['./src/routes.js'];
 
 let doc = {
     info: {
         version: "1.0.0",
-        title: "API de sapatos Jordans",
-        description: "Documentação da api"
+        title: "API de livros",
+        description: "Documentação da API de livros"
     },
     servers: [
         {
             url: "http://localhost:3000/",
-            description: "Servidor local"
+            description: "servidor localhost"
         },
         {
             url: "https://api-jordans.vercel.app/",
-            description: "Servidor de Produção"
-        }
+            description: "Servidor de produção"
+    }
     ],
-    consumes: ["application/json"],
-    produces: ["application/json"],
+    consumes: ['application/json'],
+    produces: ['application/json'],
     components: {
         schemas: {
-            Produto: mongooseToSwagger(esquemaProduto)
+            Livro: mongooseToSwagger(EsquemaProduto)
         }
     }
 }
 
-swaggerAutoGen(outputFile, endPointsFile, doc).then(() => {
-    console.log("Documentação do swagger gerada encontrasse no arquivo: " +outputFile);
-    if(process.env.NODE_ENV !== "production"){
-        require("../index.js")
-    }
+swaggerAutogen(outputFile, endpointsFile, doc).then(() => {
+    console.log("Documetação do swagger gerada encontra-se no aquivo: " + outputFile);
+    if(process.env.NODE_ENV !== 'production'){{
+        require('../index.js');
+    }}
 })
