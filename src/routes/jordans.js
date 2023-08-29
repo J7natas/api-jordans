@@ -28,7 +28,7 @@ router.get('/obter', conectarBancoDados, async function(req, res) {
 
     res.status(200).json({
       status: "Ok",
-      statusMenssagem: "Produto criado com sucesso",
+      statusMenssagem: "Produtos obtido com sucesso",
       resposta: respostaBd
     })
     
@@ -94,7 +94,30 @@ router.get('/tipo/:tipo', conectarBancoDados, async function(req, res) {
     const produtoEncontrado = await EsquemaProduto.find( { tipo: tipoProduto } );
       res.status(200).json({
         status: 'ok',
-        statusMensaagem: "Produto obtido com suceso!",
+        statusMensaagem: "Produtos obtido com suceso!",
+        resposta: produtoEncontrado
+      })
+    
+  } catch (error) {
+    return tratarErrosEsperados(res, error)
+  }
+});
+
+
+router.get('/posicao/:posicao', conectarBancoDados, async function(req, res) {
+  try {
+    // #swagger.tags = ['Jordans']
+    let posicaoProdutto = req.params.posicao;
+
+    const checkProduto = await EsquemaProduto.find({ posicao: posicaoProdutto });
+    if(!checkProduto){
+      throw new Error("Produto não encontrado");
+    }
+
+    const produtoEncontrado = await EsquemaProduto.find( { posicao: posicaoProdutto } );
+      res.status(200).json({
+        status: 'ok',
+        statusMensaagem: "Produtos obtido com suceso!",
         resposta: produtoEncontrado
       })
     
